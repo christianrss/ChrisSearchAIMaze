@@ -11,11 +11,11 @@ import (
 )
 
 const (
-	DFS = iota
-	BFS
-	GBFS
-	ASTAR
-	DIJKSTRA
+	DFS      = iota // Depth first search.
+	BFS             // Breadth first search.
+	GBFS            // Greddy best first search.
+	ASTAR           // A* search.
+	DIJKSTRA        // Dijkstra algorithm.
 )
 
 type Point struct {
@@ -28,12 +28,31 @@ type Wall struct {
 	wall  bool
 }
 
+type Node struct {
+	index  int
+	State  Point
+	Parent *Node
+	Action string
+}
+
+type Solution struct {
+	Actions []string
+	Cells   []Point
+}
+
 type Maze struct {
-	Height int
-	Width  int
-	Start  Point
-	Goal   Point
-	Walls  [][]Wall
+	Height      int
+	Width       int
+	Start       Point
+	Goal        Point
+	Walls       [][]Wall
+	CurrentNode *Node
+	Solution    Solution
+	Explored    []Point
+	Steps       int
+	NumExplored int
+	Debug       bool
+	SearchType  int
 }
 
 func main() {
